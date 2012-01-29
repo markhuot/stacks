@@ -68,10 +68,10 @@ td { vertical-align: top; }
 
 body {
   background: #f7f6f5;
-  min-width: 900px;
+  min-width: 768px;
 }
 
-#main { float: left; width: 60%; min-width: 600px; }
+#main { float: left; width: 60%; min-width: 500px; }
 #sub { padding: 20px; }
 
 .field-container {
@@ -118,12 +118,12 @@ table {
   table-layout: fixed;
 }
 
-th, td {
-  border: 1px solid #e5e9ed;
+tbody th, tbody td {
+  border: 1px solid #eee;
+  vertical-align: top;
 }
 
 th {
-  background: #e5e9ed;
   text-align: left;
   text-shadow: 0 1px 0 #fff;
   padding: 10px;
@@ -135,6 +135,10 @@ td {
 
 td.field {
   padding: 0;
+}
+
+.chooser {
+  width: 150px;
 }
 
 .chooser select {

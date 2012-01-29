@@ -13,6 +13,7 @@ $(document).delegate('.chooser select', 'change', function(e) {
 	$row.removeClass(oldType);
 	$row.addClass(newType);
 	$row.trigger('init');
+	$row.trigger('render-row');
 	$container.trigger('update');
 });
 
@@ -55,8 +56,30 @@ $(function() {
 	});
 });
 
+$(document).delegate('.row', 'render-row', function(e) {
+	var $row = $(this);
+	var cols = $row.attr('data-cols');
+	$row.find('tr:gte(0)').remove();
+	$row.find('td:gte(0)').remove();
+	for (i=0; i<cols; i++) {
+		var $cell = $('<td class="field" />');
+		$row.find('tr').append($cell);
+		$row.trigger('render-cell', {
+			"cell": $cell
+		});
+	}
+});
+
+$(document).delegate('.row[data-type="paragraph"]', 'init', function(e) {
+	$(this).attr('data-cols', 1);
+});
+
 $(document).delegate('.row[data-type="blockquote"]', 'init', function(e) {
-	
+	$(this).attr('data-cols', 2);
+});
+
+$(document).delegate('.row[data-type="blockquote"]', 'render-cell', function(e, p) {
+	p.cell.html('test');
 });
 
 // ------------------------------------------------------------------------------------
