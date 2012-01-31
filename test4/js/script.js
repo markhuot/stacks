@@ -4,19 +4,6 @@
 
 (function($){
 
-$(document).delegate('.chooser select', 'change', function(e) {
-	var $row = $(this).parents('.row').eq(0);
-	var $container = $row.parents('.field-container').eq(0);
-	var oldType = $row.attr('data-type');
-	var newType = $(this).val();
-	$row.attr('data-type', newType);
-	$row.removeClass(oldType);
-	$row.addClass(newType);
-	$row.trigger('init');
-	$row.trigger('render-row');
-	$container.trigger('update');
-});
-
 $(document).delegate('.field-container', 'update', function(e) {
 	var html = '';
 	$('.row').each(function() {
@@ -56,53 +43,74 @@ $(function() {
 	});
 });
 
-$(document).delegate('.row', 'render-row', function(e) {
-	var $row = $(this);
-	var cols = $row.attr('data-cols');
+$(document).delegate('.chooser select', 'change', function(e) {
+	var $row = $(this).parents('.row').eq(0);
+	var $container = $row.parents('.field-container').eq(0);
+	var oldType = $row.attr('data-type');
+	var newType = $(this).val();
+	$row.attr('data-type', newType);
+	$row.removeClass(oldType);
+	$row.addClass(newType);
 	$row.find('tr:gt(0)').remove();
 	$row.find('td').remove();
-	for (i=0; i<cols; i++) {
-		var $cell = $('<td class="field" />');
-		$row.find('tr').append($cell);
-		$row.trigger('render-cell', {
-			"index": i,
-			"cell": $cell
-		});
+	$row.trigger('render-row');
+	$container.trigger('update');
+});
+
+$(document).delegate('.row', 'render-row', function(e) {
+	var $row = $(this);
+	$row.attr('data-rows', 1);
+	$row.attr('data-cols', 1);
+
+	$row.trigger('init');
+	var rows = $row.attr('data-rows');
+	var cols = $row.attr('data-cols');
+
+	for (i=0; i<rows; i++) {
+		if (i > 0) {
+			$r = $('<tr />');
+			$row.find('table').append($r);
+		} else {
+			$r = $row.find('tr');
+		}
+		for (j=0; j<cols; j++) {
+			var $cell = $('<td class="field" />');
+			$r.append($cell);
+			$cell.trigger('render', {"index":{"row":i,"column":j}});
+		}
 	}
 });
 
-$(document).delegate('.row[data-type="heading"]', 'init', function(e) {
-	$(this).attr('data-cols', 1);
+$(document).delegate('.row[data-type="heading"] td.field', 'render', function(e, p) {
+	$(this).html('<textarea />');
 });
 
-$(document).delegate('.row[data-type="heading"]', 'render-cell', function(e, p) {
-	p.cell.html('<textarea rows="1" cols="80" />');
-});
-
-$(document).delegate('.row[data-type="paragraph"]', 'init', function(e) {
-	$(this).attr('data-cols', 1);
-});
-
-$(document).delegate('.row[data-type="paragraph"]', 'render-cell', function(e, p) {
-	p.cell.html('<textarea rows="1" cols="80" />');
+$(document).delegate('.row[data-type="paragraph"] td.field', 'render', function(e, p) {
+	$(this).html('<textarea />');
 });
 
 $(document).delegate('.row[data-type="blockquote"]', 'init', function(e) {
 	$(this).attr('data-cols', 2);
 });
 
-$(document).delegate('.row[data-type="blockquote"]', 'render-cell', function(e, p) {
-	switch (p.index) {
-		case 0:
-			name ='quote';
-			placeholder = 'Quote...';
-			break;
-		case 1:
-			name ='author';
-			placeholder = 'Author...';
-			break;
+$(document).delegate('.row[data-type="blockquote"] td.field', 'render', function(e, p) {
+	switch (p.index.column) {
+		case 0: name ='quote';
+		        placeholder = 'Quote...';
+		        break;
+		case 1: name ='author';
+		        placeholder = 'Author...';
+		        break;
 	}
-	p.cell.html('<textarea data-name="'+name+'" rows="1" cols="80" placeholder="'+placeholder+'" />');
+	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" />');
+});
+
+$(document).delegate('.row[data-type="unorderedlist"]', 'init', function(e) {
+	$(this).attr('data-rows', 4);
+});
+
+$(document).delegate('.row[data-type="unorderedlist"] td.field', 'render', function(e, p) {
+	$(this).html('<textarea />');
 });
 
 // ------------------------------------------------------------------------------------
