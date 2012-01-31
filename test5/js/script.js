@@ -67,33 +67,58 @@ $(document).delegate('.row', 'render-row', function(e) {
 	var cols = $row.attr('data-cols');
 
 	for (i=0; i<rows; i++) {
-		if (i > 0) {
+		if (i == 0) {
+			$r = $row.find('tr');
+		} else {
 			$r = $('<tr />');
 			$row.find('table').append($r);
-		} else {
-			$r = $row.find('tr');
 		}
 		for (j=0; j<cols; j++) {
-			var $cell = $('<td class="field" />');
+			var $cell = $('<td class="cell" />');
 			$r.append($cell);
-			$cell.trigger('render', {"index":{"row":i,"column":j}});
+			$cell.trigger('render', {"index":{
+				"totalRows":rows,
+				"row":i,
+				"totalCols":cols,
+				"column":j
+			}});
 		}
 	}
 });
 
-$(document).delegate('.row[data-type="heading"] td.field', 'render', function(e, p) {
-	$(this).html('<textarea />');
+$(document).delegate('.row', 'add-row', function(e) {
+	var $row = $(this);
+	var rows = $row.find('tr').size();
+	var cols = $row.attr('data-cols');
+	
+	$r = $('<tr />');
+	$row.find('table').append($r);
+		
+	for (j=0; j<cols; j++) {
+		var $cell = $('<td class="cell" />');
+		$r.append($cell);
+		$cell.trigger('render', {"index":{
+			"totalRows":rows,
+			"row":rows-1,
+			"totalCols":cols,
+			"column":j
+		}});
+	}
 });
 
-$(document).delegate('.row[data-type="paragraph"] td.field', 'render', function(e, p) {
-	$(this).html('<textarea />');
+$(document).delegate('.row[data-type="heading"] td.cell', 'render', function(e, p) {
+	$(this).html('<textarea rows="1" cols="80" />');
+});
+
+$(document).delegate('.row[data-type="paragraph"] td.cell', 'render', function(e, p) {
+	$(this).html('<textarea rows="1" cols="80" />');
 });
 
 $(document).delegate('.row[data-type="blockquote"]', 'init', function(e) {
 	$(this).attr('data-cols', 2);
 });
 
-$(document).delegate('.row[data-type="blockquote"] td.field', 'render', function(e, p) {
+$(document).delegate('.row[data-type="blockquote"] td.cell', 'render', function(e, p) {
 	switch (p.index.column) {
 		case 0: name ='quote';
 		        placeholder = 'Quote...';
@@ -102,15 +127,26 @@ $(document).delegate('.row[data-type="blockquote"] td.field', 'render', function
 		        placeholder = 'Author...';
 		        break;
 	}
-	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" />');
+	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" rows="1" cols="80" />');
 });
 
 $(document).delegate('.row[data-type="unorderedlist"]', 'init', function(e) {
-	$(this).attr('data-rows', 4);
+	$(this).attr('data-rows', 3);
 });
 
-$(document).delegate('.row[data-type="unorderedlist"] td.field', 'render', function(e, p) {
-	$(this).html('<textarea />');
+$(document).delegate('.row[data-type="unorderedlist"] td.cell', 'render', function(e, p) {
+	var placeholder ='';
+	if (p.index.row == p.index.totalRows-1) {
+		placeholder = 'placeholder="Add item..."';
+	}
+	$(this).html('<textarea '+placeholder+' rows="1" cols="80" />');
+});
+
+$(document).delegate('.row[data-type="unorderedlist"] textarea', 'keyup', function(e, p) {
+	if ($(this).val() && $(this).attr('placeholder')) {
+		$(this).removeAttr('placeholder');
+		$(this).parents('.row').trigger('add-row');
+	}
 });
 
 // ------------------------------------------------------------------------------------
@@ -127,7 +163,7 @@ $(document).delegate('.row[data-type="heading"]', 'update-value', function(e) {
 
 $(document).delegate('.row[data-type="blockquote"]', 'update-value', function(e) {
 	var tmpl = '<blockquote><p>{{ quote }}</p><cite>{{ author }}</cite></blockquote>';
-	$(this).find('.field textarea').each(function() {
+	$(this).find('.cell textarea').each(function() {
 		tmpl = tmpl.replace('{{ '+$(this).attr('data-name')+' }}', $(this).val());
 	});
 	$(this).attr('value', tmpl);
@@ -135,7 +171,7 @@ $(document).delegate('.row[data-type="blockquote"]', 'update-value', function(e)
 
 $(document).delegate('.row[data-type="unorderedlist"]', 'update-value', function(e) {
 	var tmpl = [];
-	$(this).find('.field textarea').each(function() {
+	$(this).find('.cell textarea').each(function() {
 		if ($(this).val()) {
 			tmpl.push($(this).val());
 		}

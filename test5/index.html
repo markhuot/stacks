@@ -15,6 +15,7 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="pictos/pictos.css" type="text/css">
   <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
@@ -31,72 +32,76 @@
         <h1 class="title">Body</h1>
         <div class="rows">
           <div class="row" data-type="paragraph">
+            <div class="chooser">
+              <p class="icon">&para;</p>
+              <select name="">
+                <option value="paragraph">Paragraph</option>
+                <option value="blockquote">Blockquote</option>
+                <option value="heading">Heading</option>
+                <option value="unorderedlist">List</option>
+              </select>
+            </div>
             <table>
               <tr>
-                <th class="chooser">
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option value="blockquote">Blockquote</option>
-                    <option value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </th>
-                <td class="field"><div><textarea rows="1" cols="80"></textarea></div></td>
+                <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
               </tr>
             </table>
           </div>
           <div class="row" data-type="blockquote">
+            <div class="chooser">
+              <p class="icon">"</p>
+              <select name="">
+                <option value="paragraph">Paragraph</option>
+                <option selected value="blockquote">Blockquote</option>
+                <option value="heading">Heading</option>
+                <option value="unorderedlist">List</option>
+              </select>
+            </div>
             <table>
               <tr>
-                <th class="chooser">
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option selected value="blockquote">Blockquote</option>
-                    <option value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </th>
-                <td class="field"><div><textarea data-name="quote" rows="1" cols="80" placeholder="Quote..."></textarea></div></td>
-                <td class="field"><div><textarea data-name="author" rows="1" cols="80" placeholder="Author..."></textarea></div></td>
+                <td class="cell"><div><textarea data-name="quote" rows="1" cols="80" placeholder="Quote..."></textarea></div></td>
+                <td class="cell"><div><textarea data-name="author" rows="1" cols="80" placeholder="Author..."></textarea></div></td>
               </tr>
             </table>
           </div>
           <div class="row" data-type="heading">
+            <div class="chooser">
+              <p class="icon">a</p>
+              <select name="">
+                <option value="paragraph">Paragraph</option>
+                <option value="blockquote">Blockquote</option>
+                <option selected value="heading">Heading</option>
+                <option value="unorderedlist">List</option>
+              </select>
+            </div>
             <table>
               <tr>
-                <th class="chooser">
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option value="blockquote">Blockquote</option>
-                    <option selected value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </th>
-                <td class="field"><div><textarea rows="1" cols="80"></textarea></div></td>
+                <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
               </tr>
             </table>
           </div>
           <div class="row" data-type="unorderedlist">
+            <div class="chooser">
+              <p class="icon">l</p>
+              <select name="">
+                <option value="paragraph">Paragraph</option>
+                <option value="blockquote">Blockquote</option>
+                <option value="heading">Heading</option>
+                <option selected value="unorderedlist">List</option>
+              </select>
+            </div>
             <table>
                 <tr>
-                  <th rowspan="4" class="chooser">
-                    <select name="">
-                      <option value="paragraph">Paragraph</option>
-                      <option value="blockquote">Blockquote</option>
-                      <option value="heading">Heading</option>
-                      <option selected value="unorderedlist">List</option>
-                    </select>
-                  </th>
-                  <td class="field"><div><textarea rows="1" cols="80"></textarea></div></td>
+                  <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
                 </tr>
                 <tr>
-                  <td class="field"><div><textarea rows="1" cols="80"></textarea></div></td>
+                  <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
                 </tr>
                 <tr>
-                  <td class="field"><div><textarea rows="1" cols="80"></textarea></div></td>
+                  <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
                 </tr>
                 <tr>
-                  <td class="field"><div><textarea placeholder="Add item..." rows="1" cols="80"></textarea></div></td>
+                  <td class="cell"><div><textarea placeholder="Add item..." rows="1" cols="80"></textarea></div></td>
                 </tr>
               </tbody>
             </table>
@@ -112,7 +117,7 @@
                       <option value="unorderedlist">List</option>
                     </select>
                   </th>
-                  <td class="field"><div><textarea disabled rows="1" cols="80"></textarea></div></td>
+                  <td class="cell"><div><textarea disabled rows="1" cols="80"></textarea></div></td>
                 </tr>
               </tbody>
             </table>
