@@ -43,7 +43,7 @@ $(function() {
 	});
 });
 
-$(document).delegate('.chooser select', 'change', function(e) {
+$(document).on('change', '.chooser select', function(e) {
 	var $field = $(this).parents('.field').eq(0);
 	var $container = $field.parents('.field-container').eq(0);
 	var oldType = $field.attr('data-type');
@@ -56,40 +56,41 @@ $(document).delegate('.chooser select', 'change', function(e) {
 	$container.trigger('update');
 });
 
-$(document).delegate('.field', 'init', function(e) {
+$(document).on('init', '.field', function(e) {
 	var $field = $(this);
 	$field.attr('data-rows', 1);
 	$field.attr('data-cols', 1);
-
-	$field.trigger('init');
+	$field.trigger('set-rows');
+	$field.trigger('set-cols');
 	var rows = $field.attr('data-rows');
 	for (i=0; i<rows; i++) {
-		$r = $('<tr />');
-		$field.find('table').append($r);
-		$r.trigger('init');
+		$row = $('<tr class="row" />');
+		$field.find('table').append($row);
 	}
+	$field.find('tr.row').each(function(i) {
+		$(this).trigger('build', i);
+	});
 });
 
-$(document).delegate('.field', 'add-row', function(e) {
+$(document).on('add-row', '.field', function(e) {
 	var $field = $(this);
-	var rows = $field.find('tr').size();
-	var cols = $field.attr('data-cols');
-	
-	$r = $('<tr />');
-	$field.find('table').append($r);
-	$r.trigger('init');
+	$row = $('<tr class="row" />');
+	$field.find('table').append($row);
+	$row.trigger('build', $field.find('tr').size()-1);
 });
 
-$(document).delegate('.row', 'init', function(e) {
-	var cols = $(this).parents('.field').eq(0).attr('data-cols');
+$(document).on('build', '.row', function(e, row) {
+	var $field = $(this).parents('.field').eq(0);
+	var cols = $field.attr('data-cols');
+	console.log(cols);
 	for (j=0; j<cols; j++) {
 		var $cell = $('<td class="cell" />');
-		$r.append($cell);
+		$(this).append($cell);
 		$cell.trigger('render', {"index":{
-			"totalRows":rows,
-			"row":rows-1,
-			"totalCols":cols,
-			"column":j
+			"totalRows": $field.find('tr').size(),
+			"row": row,
+			"totalCols": cols,
+			"column": j
 		}});
 	}
 });
@@ -102,7 +103,7 @@ $(document).delegate('.field[data-type="paragraph"] td.cell', 'render', function
 	$(this).html('<textarea rows="1" cols="80" />');
 });
 
-$(document).delegate('.field[data-type="blockquote"]', 'init', function(e) {
+$(document).delegate('.field[data-type="blockquote"]', 'set-cols', function(e) {
 	$(this).attr('data-cols', 2);
 });
 
@@ -118,7 +119,7 @@ $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', functio
 	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" rows="1" cols="80" />');
 });
 
-$(document).delegate('.field[data-type="unorderedlist"]', 'init', function(e) {
+$(document).delegate('.field[data-type="unorderedlist"]', 'set-rows', function(e) {
 	$(this).attr('data-rows', 3);
 });
 
@@ -130,7 +131,7 @@ $(document).delegate('.field[data-type="unorderedlist"] td.cell', 'render', func
 	$(this).html('<textarea '+placeholder+' rows="1" cols="80" />');
 });
 
-$(document).delegate('.field[data-type="unorderedlist"] textarea', 'keyup', function(e, p) {
+$(document).delegate('.field[data-type="unorderedlist"] textarea', 'keyup', function(e) {
 	if ($(this).val() && $(this).attr('placeholder')) {
 		$(this).removeAttr('placeholder');
 		$(this).parents('.field').trigger('add-row');

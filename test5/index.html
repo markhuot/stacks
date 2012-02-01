@@ -31,6 +31,24 @@
       <div class="field-container">
         <h1 class="title">Body</h1>
         <div class="fields">
+          <div class="field" data-type="heading">
+            <div class="chooser">
+              <div class="sheild">
+                <p class="icon">b</p>
+                <select name="">
+                  <option value="paragraph">Paragraph</option>
+                  <option value="blockquote">Blockquote</option>
+                  <option selected value="heading">Heading</option>
+                  <option value="unorderedlist">List</option>
+                </select>
+              </div>
+            </div>
+            <table>
+              <tr class="row">
+                <td class="cell"><div><textarea rows="1" cols="80" placeholder="Heading..."></textarea></div></td>
+              </tr>
+            </table>
+          </div>
           <div class="field" data-type="paragraph">
             <div class="chooser">
               <div class="sheild">
@@ -45,7 +63,7 @@
             </div>
             <table>
               <tr class="row">
-                <td class="cell"><div><textarea rows="20" cols="80"></textarea></div></td>
+                <td class="cell"><div><textarea rows="20" cols="80" placeholder="..."></textarea></div></td>
               </tr>
             </table>
           </div>
@@ -68,25 +86,7 @@
               </tr>
             </table>
           </div>
-          <div class="field" data-type="heading">
-            <div class="chooser">
-              <div class="sheild">
-                <p class="icon">b</p>
-                <select name="">
-                  <option value="paragraph">Paragraph</option>
-                  <option value="blockquote">Blockquote</option>
-                  <option selected value="heading">Heading</option>
-                  <option value="unorderedlist">List</option>
-                </select>
-              </div>
-            </div>
-            <table>
-              <tr class="row">
-                <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
-              </tr>
-            </table>
-          </div>
-          <div class="field" data-type="unorderedlist">
+          <div class="field" data-type="unorderedlist" data-cols="1" data-rows="3">
             <div class="chooser">
               <div class="sheild">
                 <p class="icon">l</p>
@@ -99,9 +99,6 @@
               </div>
             </div>
             <table>
-                <tr class="row">
-                  <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
-                </tr>
                 <tr class="row">
                   <td class="cell"><div><textarea rows="1" cols="80"></textarea></div></td>
                 </tr>
@@ -146,8 +143,8 @@
   </div> <!--! end of #container -->
 
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <script src="js/libs/jquery-ui-1.8.17.custom.min.js"></script>
 
