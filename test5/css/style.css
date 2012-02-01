@@ -108,39 +108,77 @@ body {
   padding: 0 0 10px;
 }
 
-.row {
+.field {
   margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding-left: 40px;
+  position: relative;
 }
 
 table {
   width: 100%;
   background: #fff;
   table-layout: fixed;
-  border: 1px solid #eee;
 }
 
 td {
   vertical-align: top;
   padding: 10px;
-  border: 1px dotted #eee;
+  border: 1px dotted #ccc;
+  border-width: 0 0 1px 1px;
+}
+
+tr:last-child td {
+  border-bottom: none;
 }
 
 td.cell {
-  padding: 0 0 0 40px;
+  padding: 0;
 }
 
 .chooser {
-  border-right: 1px dotted red;
   position: absolute;
+  left: 0;
+  top: 0;
   float: left;
   text-align: center;
-  width: 40px;
+  width: 30px;
+  overflow: hidden;
+  background: rgba(0,0,0,0);
+}
+
+.chooser, .icon {
+  -webkit-transition: all 0.5s;
+}
+
+.chooser:hover {
+  width: 100px;
+  background: rgba(0,0,0,1);
+}
+
+.chooser:hover .icon {
+  margin-left: -30px;
+}
+
+.sheild {
+  width: 200px;
+  float: left;
+}
+
+.chooser .icon {
+  font-family: Pictos;
+  float: left;
+  padding: 12px 15px 12px 10px;
+  margin: 0;
 }
 
 .chooser select {
-  display: none;
+  float: left;
   -webkit-appearance: none;
   border: none;
+  background: none;
+  padding: 12px;
+  color: #fff;
 }
 
 .add {
@@ -175,11 +213,15 @@ td.cell {
   color: #eee;
 }
 
-.add.row table {
+.add.field {
+  border: 1px solid #eee;
+}
+
+.add.field table, .add.field .chooser {
   opacity: 0.3;
 }
 
-.add.row {
+.add.field {
   margin-bottom: 0;
 }
 
@@ -195,10 +237,6 @@ textarea {
 
 textarea:focus {
   resize: vertical;
-}
-
-.icon {
-  font-family: Pictos;
 }
 
 
