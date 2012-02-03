@@ -37,14 +37,16 @@ $(document).delegate('.add a', 'click', function(e) {
 $(function() {
 	$('.fields').sortable({
 		"axis": "y",
+		"handle": ".chooser",
 		"change": function(e, ui) {
 			ui.item.parents('.field-container').trigger('update');
 		}
-	});
+	}).enableSelection();
 });
 
-$(document).on('click', '.icon', function(e) {
+$(document).on('click', '.chooser', function(e) {
 	$(this).parents('.field').eq(0).toggleClass('flip');
+	$('*:focus').blur();
 });
 
 $(document).on('change', '.chooser select', function(e) {
