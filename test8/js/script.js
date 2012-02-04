@@ -24,13 +24,15 @@ $(document).delegate('.field textarea', 'keyup', function(e) {
 	$(this).parents('.field-container').eq(0).trigger('update');
 });
 
-$(document).delegate('.add a', 'click', function(e) {
-	var $oldField = $(this).parents('.field').eq(0);
-	var $newField = $oldField.clone(true).removeClass('add').hide();
-	$newField.find('> .anchor').remove();
-	$newField.find('*[disabled]').removeAttr('disabled');
-	$oldField.before($newField);
+$(document).delegate('.add select', 'change', function(e) {
+	var $oldField = $('.field').eq(-1);
+	var $newField = $oldField.clone(true).hide();
+	$newField.find('tr').remove();
+	$newField.attr('data-type', $(this).val());
+	$(this).val('');
+	$oldField.after($newField);
 	$newField.slideDown();
+	$newField.trigger('init');
 	e.preventDefault();
 });
 
@@ -49,21 +51,9 @@ $(document).on('click', '.chooser', function(e) {
 	$('*:focus').blur();
 });
 
-$(document).on('change', '.chooser select', function(e) {
-	var $field = $(this).parents('.field').eq(0);
-	var $container = $field.parents('.field-container').eq(0);
-	var oldType = $field.attr('data-type');
-	var newType = $(this).val();
-	$field.attr('data-type', newType);
-	$field.removeClass(oldType);
-	$field.addClass(newType);
-	$field.find('tr').remove();
-	$field.trigger('init');
-	$container.trigger('update');
-});
-
 $(document).on('init', '.field', function(e) {
 	var $field = $(this);
+	$field.find('.icon').trigger('render');
 	$field.attr('data-rows', 1);
 	$field.attr('data-cols', 1);
 	$field.trigger('set-rows');
@@ -104,12 +94,24 @@ $(function() {
 	$('.field').trigger('init');
 });
 
+$(document).delegate('.field[data-type="heading"] .icon', 'render', function(e) {
+	$(this).text('^');
+});
+
 $(document).delegate('.field[data-type="heading"] td.cell', 'render', function(e, p) {
 	$(this).html('<textarea rows="1" cols="80" placeholder="Heading..." />');
 });
 
+$(document).delegate('.field[data-type="paragraph"] .icon', 'render', function(e) {
+	$(this).html('&para;');
+});
+
 $(document).delegate('.field[data-type="paragraph"] td.cell', 'render', function(e, p) {
 	$(this).html('<textarea rows="15" cols="80" placeholder="..." />');
+});
+
+$(document).delegate('.field[data-type="blockquote"] .icon', 'render', function(e) {
+	$(this).text('"');
 });
 
 $(document).delegate('.field[data-type="blockquote"]', 'set-rows', function(e) {
@@ -128,6 +130,42 @@ $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', functio
 		        break;
 	}
 	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" rows="'+rows+'" cols="80" />');
+});
+
+$(document).delegate('.field[data-type="img"] .icon', 'render', function(e) {
+	$(this).text('P');
+});
+
+$(document).delegate('.field[data-type="img"]', 'set-rows', function(e) {
+	$(this).attr('data-rows', 2);
+	$(this).attr('data-cols', 2);
+});
+
+$(document).delegate('.field[data-type="img"] td.cell', 'render', function(e, p) {
+	width = false;
+	switch (p.index.row+':'+p.index.column) {
+		case '0:0': name ='image';
+			$(this).attr('colspan', 2);
+		        placeholder = 'Image...';
+		        break;
+		case '0:1':
+			$(this).remove();
+			break;
+		case '1:0': name ='caption';
+		        placeholder = 'Caption...';
+			width = '66%';
+		        break;
+		case '1:1': name ='credit';
+		        placeholder = 'Credit...';
+			width = '33%';
+		        break;
+	}
+	$(this).attr('width', width);
+	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" rows="1" cols="80" />');
+});
+
+$(document).delegate('.field[data-type="unorderedlist"] .icon', 'render', function(e) {
+	$(this).text('l');
 });
 
 $(document).delegate('.field[data-type="unorderedlist"]', 'set-rows', function(e) {

@@ -34,15 +34,7 @@
           <div class="field" data-type="heading">
             <div class="front">
               <div class="chooser">
-                <div class="sheild">
                   <p class="icon">b</p>
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option value="blockquote">Blockquote</option>
-                    <option selected value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </div>
               </div>
               <div class="field-contents">
                 <table>
@@ -56,15 +48,7 @@
           <div class="field" data-type="paragraph">
             <div class="front">
               <div class="chooser">
-                <div class="sheild">
                   <p class="icon">&para;</p>
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option value="blockquote">Blockquote</option>
-                    <option value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </div>
               </div>
               <div class="field-contents">
                 <table>
@@ -78,15 +62,7 @@
           <div class="field" data-type="blockquote">
             <div class="front">
               <div class="chooser">
-                <div class="sheild">
                   <p class="icon">"</p>
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option selected value="blockquote">Blockquote</option>
-                    <option value="heading">Heading</option>
-                    <option value="unorderedlist">List</option>
-                  </select>
-                </div>
               </div>
               <div class="field-contents">
                 <table>
@@ -100,15 +76,7 @@
           <div class="field" data-type="unorderedlist" data-cols="1" data-rows="3">
             <div class="front">
               <div class="chooser">
-                <div class="sheild">
                   <p class="icon">l</p>
-                  <select name="">
-                    <option value="paragraph">Paragraph</option>
-                    <option value="blockquote">Blockquote</option>
-                    <option value="heading">Heading</option>
-                    <option selected value="unorderedlist">List</option>
-                  </select>
-                </div>
               </div>
               <div class="field-contents">
                 <table>
@@ -120,6 +88,14 @@
             </div>
           </div>
           <div class="add">
+            <select name="type">
+              <option value=""></option>
+              <option value="heading">Heading</option>
+              <option value="paragraph">Paragraphg</option>
+              <option value="blockquote">Blockquote</option>
+              <option value="unorderedlist">List</option>
+              <option value="img">Image</option>
+            </select>
             <a href="#" class="anchor"><span>+ Add Block</span></a>
           </div>
         </div>
@@ -138,6 +114,7 @@
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
   <script src="js/libs/jquery-ui-1.8.17.custom.min.js"></script>
+  <script src="js/jquery.ui.touch-punch.js"></script>
 
 
   <!-- scripts concatenated and minified via ant build script-->
