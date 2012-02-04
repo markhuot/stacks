@@ -1,0 +1,140 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Test</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="pictos/pictos.css" type="text/css">
+  <!-- end CSS-->
+
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+
+    </header>
+    <div id="main" role="main">
+      <div class="field-container">
+        <h1 class="title">Body</h1>
+        <div class="fields">
+          <div class="field" data-type="heading">
+            <div class="front">
+              <div class="chooser">
+                  <p class="icon">b</p>
+              </div>
+              <div class="field-contents">
+                <table>
+                </table>
+              </div>
+            </div>
+            <div class="back">
+              <p>the back</p>
+            </div>
+          </div>
+          <div class="field" data-type="paragraph">
+            <div class="front">
+              <div class="chooser">
+                  <p class="icon">&para;</p>
+              </div>
+              <div class="field-contents">
+                <table>
+                </table>
+              </div>
+            </div>
+            <div class="back">
+              <p>the back</p>
+            </div>
+          </div>
+          <div class="field" data-type="blockquote">
+            <div class="front">
+              <div class="chooser">
+                  <p class="icon">"</p>
+              </div>
+              <div class="field-contents">
+                <table>
+                </table>
+              </div>
+            </div>
+            <div class="back">
+              <p>the back</p>
+            </div>
+          </div>
+          <div class="field" data-type="unorderedlist" data-cols="1" data-rows="3">
+            <div class="front">
+              <div class="chooser">
+                  <p class="icon">l</p>
+              </div>
+              <div class="field-contents">
+                <table>
+                </table>
+              </div>
+            </div>
+            <div class="back">
+              <p>the back</p>
+            </div>
+          </div>
+          <div class="add">
+            <select name="type">
+              <option value=""></option>
+              <option value="heading">Heading</option>
+              <option value="paragraph">Paragraphg</option>
+              <option value="blockquote">Blockquote</option>
+              <option value="unorderedlist">List</option>
+              <option value="img">Image</option>
+            </select>
+            <a href="#" class="anchor"><span>+ Add Block</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sub">
+      Rendered output
+    </div>
+    <footer>
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="js/libs/jquery-ui-1.8.17.custom.min.js"></script>
+  <script src="js/jquery.ui.touch-punch.js"></script>
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts-->
+
+
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>
