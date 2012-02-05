@@ -54,6 +54,7 @@ $(document).on('click', '.chooser', function(e) {
 $(document).on('init', '.field', function(e) {
 	var $field = $(this);
 	$field.find('.icon').trigger('render');
+	$field.find('.back').trigger('render');
 	$field.attr('data-rows', 1);
 	$field.attr('data-cols', 1);
 	$field.trigger('set-rows');
@@ -104,6 +105,10 @@ $(document).delegate('.field[data-type="heading"] td.cell', 'render', function(e
 
 $(document).delegate('.field[data-type="paragraph"] .icon', 'render', function(e) {
 	$(this).html('&para;');
+});
+
+$(document).delegate('.field[data-type="paragraph"] .back', 'render', function(e, p) {
+	$(this).html('<select><option>test</option></select>');
 });
 
 $(document).delegate('.field[data-type="paragraph"] td.cell', 'render', function(e, p) {
@@ -178,6 +183,10 @@ $(document).delegate('.field[data-type="unorderedlist"] td.cell', 'render', func
 		placeholder = 'placeholder="Add item..."';
 	}
 	$(this).html('<textarea '+placeholder+' rows="1" cols="80" />');
+});
+
+$(document).delegate('.field[data-type="unorderedlist"] .back', 'render', function(e) {
+	$(this).html('<select><option>Bulleted</option><option>Numbered</option></select>');
 });
 
 $(document).delegate('.field[data-type="unorderedlist"] textarea', 'keyup', function(e) {
