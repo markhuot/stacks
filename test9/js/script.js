@@ -40,6 +40,7 @@ $(function() {
 	$('.fields').sortable({
 		"axis": "y",
 		"handle": ".icon",
+		"items": ".field:not(.add)",
 		"change": function(e, ui) {
 			ui.item.parents('.field-container').trigger('update');
 		}
@@ -225,6 +226,23 @@ $(document).delegate('.field[data-type="unorderedlist"]', 'update-value', functi
 	});
 	if (tmpl.length) {
 		$(this).attr('value', '<ul><li>'+tmpl.join('</li><li>')+'</li></ul>');
+	}
+	else {
+		$(this).attr('value', '');
+	}
+});
+
+$(document).delegate('.field[data-type="unorderedlist"] .back select', 'change', function(e) {
+	var $field = $(this).parents('.field').eq(0);
+	$field.attr('data-bullet', 'number');
+});
+
+$(document).delegate('.field[data-type="img"]', 'update-value', function(e) {
+	var src = $(this).find('textarea[data-name="image"]').val();
+	var caption = $(this).find('textarea[data-name="caption"]').val();
+	var credit = $(this).find('textarea[data-name="credit"]').val();
+	if (src) {
+		$(this).attr('value', '<figure><img src="'+src+'" style="max-width:200px" /><p>'+caption+' -'+credit+'</p></figure>');
 	}
 	else {
 		$(this).attr('value', '');
