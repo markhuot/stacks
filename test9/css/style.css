@@ -187,6 +187,17 @@ body {
   z-index: 100;
 }
 
+.section {
+  border-bottom: 1px dashed: #999;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: #999;
+  padding: 0 0 5px;
+}
+
 .field-contents {
   position: relative;
   z-index: 199;

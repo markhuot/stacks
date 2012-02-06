@@ -26,7 +26,7 @@ $(document).delegate('.field textarea', 'keyup', function(e) {
 
 $(document).delegate('.add select', 'change', function(e) {
 	var $oldField = $('.field').eq(-1);
-	var $newField = $oldField.clone(true).hide();
+	var $newField = $('<div class="field" />')
 	$newField.find('tr').remove();
 	$newField.attr('data-type', $(this).val());
 	$(this).val('');
@@ -48,12 +48,18 @@ $(function() {
 });
 
 $(document).on('click', '.chooser', function(e) {
+	$(this).parents('.field').siblings('.flip').removeClass('flip');
 	$(this).parents('.field').eq(0).toggleClass('flip');
 	$('*:focus').blur();
 });
 
 $(document).on('init', '.field', function(e) {
 	var $field = $(this);
+	var $front = $('<div class="front" />');
+	$front.append('<div class="chooser"><p class="icon" /></div><div class="field-contents"><table /></div>');
+	var $back = $('<div class="back" />');
+	$field.append($front);
+	$field.append($back);
 	$field.find('.icon').trigger('render');
 	$field.find('.back').trigger('render');
 	$field.attr('data-rows', 1);
@@ -106,10 +112,6 @@ $(document).delegate('.field[data-type="heading"] td.cell', 'render', function(e
 
 $(document).delegate('.field[data-type="paragraph"] .icon', 'render', function(e) {
 	$(this).html('&para;');
-});
-
-$(document).delegate('.field[data-type="paragraph"] .back', 'render', function(e, p) {
-	$(this).html('<select><option>test</option></select>');
 });
 
 $(document).delegate('.field[data-type="paragraph"] td.cell', 'render', function(e, p) {
@@ -187,7 +189,7 @@ $(document).delegate('.field[data-type="unorderedlist"] td.cell', 'render', func
 });
 
 $(document).delegate('.field[data-type="unorderedlist"] .back', 'render', function(e) {
-	$(this).html('<select><option>Bulleted</option><option>Numbered</option></select>');
+	$(this).html('<div class="section"><label>Style</label><select><option value="bullet">Bulleted</option><option value="number">Numbered</option></select></div>');
 });
 
 $(document).delegate('.field[data-type="unorderedlist"] textarea', 'keyup', function(e) {
@@ -224,8 +226,10 @@ $(document).delegate('.field[data-type="unorderedlist"]', 'update-value', functi
 			tmpl.push($(this).val());
 		}
 	});
+	var tag = $(this).attr('data-style')=='number'?'ol':'ul';
+	console.log(tag);
 	if (tmpl.length) {
-		$(this).attr('value', '<ul><li>'+tmpl.join('</li><li>')+'</li></ul>');
+		$(this).attr('value', '<'+tag+'><li>'+tmpl.join('</li><li>')+'</li></'+tag+'>');
 	}
 	else {
 		$(this).attr('value', '');
@@ -234,7 +238,8 @@ $(document).delegate('.field[data-type="unorderedlist"]', 'update-value', functi
 
 $(document).delegate('.field[data-type="unorderedlist"] .back select', 'change', function(e) {
 	var $field = $(this).parents('.field').eq(0);
-	$field.attr('data-bullet', 'number');
+	$field.attr('data-style', $(this).val());
+	$(this).parents('.field-container').eq(0).trigger('update');
 });
 
 $(document).delegate('.field[data-type="img"]', 'update-value', function(e) {
