@@ -32,16 +32,11 @@ $(document).delegate('.field[data-type="img"] td.cell', 'render', function(e, p)
 
 	$(this).attr('data-name', name);
 	$(this).attr('width', width);
-	$(this).html($('<textarea />', {
-			"data-name": name,
-			"placeholder": placeholder,
-			"rows": 1,
-			"cols": 80
-		}));
+	$(this).attr('placeholder', placeholder);
 });
 
-$(document).delegate('.field[data-type="img"] textarea', 'keyup', function(e) {
-	$(this).parents('td.cell').eq(0).attr('value', $(this).val());
+$(document).delegate('.field[data-type="img"] td.cell', 'keyup', function(e) {
+	$(this).attr('value', $(this).text());
 	$(this).trigger('update');
 });
 

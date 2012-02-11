@@ -2,7 +2,7 @@ $(document).delegate('.field[data-type="blockquote"] .icon', 'render', function(
 	$(this).text('"');
 });
 
-$(document).delegate('.field[data-type="blockquote"]', 'set-rows', function(e) {
+$(document).delegate('.field[data-type="blockquote"]', 'init', function(e) {
 	$(this).attr('data-rows', 2);
 });
 
@@ -17,13 +17,23 @@ $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', functio
 		        rows = 1;
 		        break;
 	}
-	$(this).html('<textarea data-name="'+name+'" placeholder="'+placeholder+'" rows="'+rows+'" cols="80" />');
+	$(this).attr('data-name', name);
+	$(this).attr('placeholder', placeholder);
+	$(this).css({
+		"display": "block",
+		"min-height": rows+'em'
+	});
 });
 
-$(document).delegate('.field[data-type="blockquote"]', 'update-value', function(e) {
+$(document).delegate('.field[data-type="blockquote"] td.cell', 'keyup', function(e) {
+	$(this).attr('value', $(this).text());
+	$(this).trigger('update');
+});
+
+$(document).delegate('.field[data-type="blockquote"]', 'update', function(e) {
 	var tmpl = '<blockquote><p>{{ quote }}</p><cite>{{ author }}</cite></blockquote>';
-	$(this).find('.cell textarea').each(function() {
-		tmpl = tmpl.replace('{{ '+$(this).attr('data-name')+' }}', $(this).val());
+	$(this).find('td.cell').each(function() {
+		tmpl = tmpl.replace('{{ '+$(this).attr('data-name')+' }}', $(this).text());
 	});
 	$(this).attr('value', tmpl);
 });

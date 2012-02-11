@@ -19,13 +19,14 @@ $(document).on('update', '.fields', function(e) {
 	$('#sub').html(html);
 });
 
-$(document).on('add-field', '.fields', function(e, type) {
-	if (!type) { type = 'paragraph'; }
-	var $oldField = $('.field').eq(-1);
+$(document).on('add-field', '.fields', function(e, p) {
+	if (!p.type) { p.type = 'paragraph'; }
 	var $newField = $('<div class="field" />')
-	$newField.attr('data-type', type);
-	$(this).val('');
-	$oldField.after($newField);
+	$newField.attr('data-type', p.type);
+	if (!p.after) {
+		p.after = $('.field').eq(-1);
+	}
+	$(p.after).after($newField);
 	$newField.slideDown();
 	$newField.trigger('init');
 	e.preventDefault();
@@ -61,7 +62,7 @@ $(document).on('build', '.row', function(e, row) {
 	var $field = $(this).parents('.field').eq(0);
 	var cols = $field.attr('data-cols')?$field.attr('data-cols'):1;
 	for (j=0; j<cols; j++) {
-		var $cell = $('<td class="cell" />');
+		var $cell = $('<td class="cell" contenteditable />');
 		$(this).append($cell);
 		$cell.trigger('render', {"index":{
 			"totalRows": $field.find('tr').size(),
@@ -75,19 +76,29 @@ $(document).on('build', '.row', function(e, row) {
 
 
 
-$(document).on('keydown', '.field textarea', function(e) {
-	if (e.keyCode != 13 || e.isPropagationStopped()) { return true; }
-	var $next = $('.field:has(*:focus)').next().find('textarea').eq(0);
-	
-	if ($next.size()) {
-		$next.focus();
-		return false;
+
+
+
+$(document).on('keydown', '.field', function(e) {
+	var $field = $(this);
+
+	if (e.keyCode == 8 && $(this).attr('value') == false) {
+		if ($field.prev('.field').size()) {
+			$field.prev().find('td.cell').eq(0).focus();
+			$field.remove();
+			return false;
+		}
+		else if ($field.next('.field').size()) {
+			$field.next().find('td.cell').eq(0).focus();
+			$field.remove();
+			return false;
+		}
 	}
-
-	$(this).parents('.fields').eq(0).trigger('add-field');
-	$('.field:has(*:focus)').next().find('textarea').eq(0).focus();
-
-	e.preventDefault();
+	if (e.keyCode == 13 && !e.isPropagationStopped()) {
+		$field.parents('.fields').trigger('add-field', {"type":"paragraph", "after":$field});
+		$('.field:has(*:focus)').next('.field').find('td.cell').eq(0).trigger('focus');
+		e.preventDefault();
+	}
 });
 
 

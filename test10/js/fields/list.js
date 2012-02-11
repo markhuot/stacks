@@ -1,38 +1,33 @@
-$(document).delegate('.field[data-type="list"]', 'init', function(e) {
-	$(this).attr('data-rows', 3);
-});
-
 $(document).delegate('.field[data-type="list"] .icon', 'render', function(e) {
 	$(this).text('l');
-});
-
-$(document).delegate('.field[data-type="list"] td.cell', 'render', function(e, p) {
-	$(this).html($('<textarea />', {
-		"placeholder": (p.index.row == p.index.totalRows-1) ? 'Add item...' : '',
-		"rows": 1,
-		"cols": 80
-	}));
 });
 
 $(document).delegate('.field[data-type="list"] .back', 'render', function(e) {
 	$(this).html('<div class="section"><label>Style</label><select><option value="bullet">Bulleted</option><option value="number">Numbered</option></select></div>');
 });
 
-$(document).on('keydown', '.field[data-type="list"] textarea', function(e) {
-	if (e.keyCode != 13) { return true; }
-	var $next = $('.row:has(*:focus)').next();
-	if ($next.size()) {
-		$next.find('textarea').focus();
-		e.stopPropagation();
+$(document).on('keydown', '.field[data-type="list"] td.cell', function(e) {
+	if (e.keyCode == 8 && $(this).text().replace(/\s*/, '') == '') {
+		var $row = $(this).parents('.row');
+		$row.prev().find('td.cell').focus();
+		$row.remove();
 		return false;
+	}
+	if (e.keyCode == 13) {
+		var $next = $('.row:has(*:focus)').next();
+		if ($next.size()) {
+			$next.find('td.cell').focus();
+			e.stopPropagation();
+			return false;
+		}
 	}
 });
 
-$(document).delegate('.field[data-type="list"] textarea', 'keyup', function(e) {
-	$(this).parents('td.cell').attr('value', $(this).val());
+$(document).on('keyup', '.field[data-type="list"] td.cell', function(e) {
+	var $field = $(this).parents('.field');
+	$(this).attr('value', $(this).text());
 	
-	if ($(this).val() && $(this).attr('placeholder')) {
-		$(this).removeAttr('placeholder');
+	if ($(this).text() && !$field.find('td.cell:empty').size()) {
 		$(this).parents('.field').trigger('add-row');
 	}
 
