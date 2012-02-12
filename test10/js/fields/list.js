@@ -6,32 +6,15 @@ $(document).delegate('.field[data-type="list"] .back', 'render', function(e) {
 	$(this).html('<div class="section"><label>Style</label><select><option value="bullet">Bulleted</option><option value="number">Numbered</option></select></div>');
 });
 
-$(document).on('keydown', '.field[data-type="list"] td.cell', function(e) {
-	if (e.keyCode == 8 && $(this).text().replace(/\s*/, '') == '') {
-		var $row = $(this).parents('.row');
-		$row.prev().find('td.cell').focus();
-		$row.remove();
-		return false;
-	}
-	if (e.keyCode == 13) {
-		var $next = $('.row:has(*:focus)').next();
-		if ($next.size()) {
-			$next.find('td.cell').focus();
-			e.stopPropagation();
-			return false;
-		}
-	}
+$(document).delegate('.field[data-type="list"] .cell', 'render', function(e) {
+	$(this).attr('placeholder', 'Add Item...');
 });
 
 $(document).on('keyup', '.field[data-type="list"] td.cell', function(e) {
 	var $field = $(this).parents('.field');
-	$(this).attr('value', $(this).text());
-	
-	if ($(this).text() && !$field.find('td.cell:empty').size()) {
-		$(this).parents('.field').trigger('add-row');
+	if ($(this).text() && !$field.find('.cell.placeholder').size()) {
+		$(this).trigger('add-row');
 	}
-
-	$(this).trigger('update');
 });
 
 $(document).delegate('.field[data-type="list"]', 'update', function(e) {

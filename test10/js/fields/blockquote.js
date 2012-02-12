@@ -25,11 +25,6 @@ $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', functio
 	});
 });
 
-$(document).delegate('.field[data-type="blockquote"] td.cell', 'keyup', function(e) {
-	$(this).attr('value', $(this).text());
-	$(this).trigger('update');
-});
-
 $(document).delegate('.field[data-type="blockquote"]', 'update', function(e) {
 	var tmpl = '<blockquote><p>{{ quote }}</p><cite>{{ author }}</cite></blockquote>';
 	$(this).find('td.cell').each(function() {

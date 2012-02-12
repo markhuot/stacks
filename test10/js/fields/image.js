@@ -35,11 +35,6 @@ $(document).delegate('.field[data-type="img"] td.cell', 'render', function(e, p)
 	$(this).attr('placeholder', placeholder);
 });
 
-$(document).delegate('.field[data-type="img"] td.cell', 'keyup', function(e) {
-	$(this).attr('value', $(this).text());
-	$(this).trigger('update');
-});
-
 $(document).delegate('.field[data-type="img"]', 'update', function(e) {
 	var $field = $(this);
 	var src = $field.find('td.cell[data-name="image"]').val();

@@ -19,6 +19,10 @@ $(document).on('update', '.fields', function(e) {
 	$('#sub').html(html);
 });
 
+$(document).on('change', '.add select', function(e) {
+	$('.fields').trigger('add-field', {type:$(this).val()});
+});
+
 $(document).on('add-field', '.fields', function(e, p) {
 	if (!p.type) { p.type = 'paragraph'; }
 	var $newField = $('<div class="field" />')
@@ -70,34 +74,70 @@ $(document).on('build', '.row', function(e, row) {
 			"totalCols": cols,
 			"column": j
 		}});
+		$cell.trigger('did-render');
 	}
 });
 
-
-
-
-
-
+$(document).delegate('.field td.cell', 'keyup', function(e) {
+	var value = $(this).text() != $(this).attr('placeholder') ? $(this).text() :'';
+	$(this).attr('value', value);
+	$(this).trigger('update');
+});
 
 $(document).on('keydown', '.field', function(e) {
 	var $field = $(this);
+	var $cell = $(e.srcElement);
+	var $row = $cell.parents('.row').eq(0);
 
-	if (e.keyCode == 8 && $(this).attr('value') == false) {
-		if ($field.prev('.field').size()) {
-			$field.prev().find('td.cell').eq(0).focus();
+	if (e.keyCode == 8 && $cell.attr('value') == false) {
+		if ($row.prev('.row').size()) {
+			var cell = $row.prev().find('.cell').get(-1);
+			$(cell).focus();
+			range = document.createRange();
+			range.selectNodeContents(cell);
+			range.collapse(false);
+			selection = window.getSelection();
+			selection.removeAllRanges();
+			selection.addRange(range);
+			$row.remove();
+			return false;
+		}
+		else if ($row.next('.row').size()) {
+			var cell = $row.next().find('.cell').get(-1);
+			$(cell).focus();
+			$row.remove();
+			return false;
+		}
+		else if ($field.prev('.field').size()) {
+			var cell = $field.prev().find('td.cell').eq(-1).get(0);
+			$(cell).focus();
+			range = document.createRange();
+			range.selectNodeContents(cell);
+			range.collapse(false);
+			selection = window.getSelection();
+			selection.removeAllRanges();
+			selection.addRange(range);
 			$field.remove();
 			return false;
 		}
 		else if ($field.next('.field').size()) {
-			$field.next().find('td.cell').eq(0).focus();
+			var cell = $field.next().find('td.cell').eq(0).get(0);
+			$(cell).focus();
 			$field.remove();
 			return false;
 		}
 	}
 	if (e.keyCode == 13 && !e.isPropagationStopped()) {
-		$field.parents('.fields').trigger('add-field', {"type":"paragraph", "after":$field});
-		$('.field:has(*:focus)').next('.field').find('td.cell').eq(0).trigger('focus');
-		e.preventDefault();
+		if ($row.next('.row').size()) {
+			var cell = $row.next().find('.cell').get(-1);
+			$(cell).focus();
+			e.preventDefault();
+		}
+		else {
+			$field.parents('.fields').trigger('add-field', {"type":"paragraph", "after":$field});
+			$('.field:has(*:focus)').next('.field').find('td.cell').eq(0).trigger('focus');
+			e.preventDefault();
+		}
 	}
 });
 
@@ -114,16 +154,7 @@ $(document).on('keydown', '.field', function(e) {
 
 
 
-$(document).on('change', '.add select', function(e) {
-	var $oldField = $('.field').eq(-1);
-	var $newField = $('<div class="field" />')
-	$newField.attr('data-type', $(this).val());
-	$(this).val('');
-	$oldField.after($newField);
-	$newField.slideDown();
-	$newField.trigger('init');
-	e.preventDefault();
-});
+
 
 
 
