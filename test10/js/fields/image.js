@@ -7,6 +7,10 @@ $(document).delegate('.field[data-type="img"] .icon', 'render', function(e) {
 	$(this).text('P');
 });
 
+$(document).on('remove', '.field[data-type="img"] .row', function(e) {
+	return false;
+});
+
 $(document).delegate('.field[data-type="img"] td.cell', 'render', function(e, p) {
 	switch (p.index.row+':'+p.index.column) {
 		case '0:0':

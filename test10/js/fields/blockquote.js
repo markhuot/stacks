@@ -6,6 +6,10 @@ $(document).delegate('.field[data-type="blockquote"]', 'init', function(e) {
 	$(this).attr('data-rows', 2);
 });
 
+$(document).on('remove', '.field[data-type="blockquote"] .row', function(e) {
+	return false;
+});
+
 $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', function(e, p) {
 	switch (p.index.row) {
 		case 0: name ='quote';
@@ -28,7 +32,7 @@ $(document).delegate('.field[data-type="blockquote"] td.cell', 'render', functio
 $(document).delegate('.field[data-type="blockquote"]', 'update', function(e) {
 	var tmpl = '<blockquote><p>{{ quote }}</p><cite>{{ author }}</cite></blockquote>';
 	$(this).find('td.cell').each(function() {
-		tmpl = tmpl.replace('{{ '+$(this).attr('data-name')+' }}', $(this).text());
+		tmpl = tmpl.replace('{{ '+$(this).attr('data-name')+' }}', $(this).val());
 	});
 	$(this).attr('value', tmpl);
 });

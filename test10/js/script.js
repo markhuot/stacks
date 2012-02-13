@@ -25,7 +25,7 @@ $(document).on('change', '.add select', function(e) {
 
 $(document).on('add-field', '.fields', function(e, p) {
 	if (!p.type) { p.type = 'paragraph'; }
-	var $newField = $('<div class="field" />')
+	var $newField = $('<div class="field" />').hide();
 	$newField.attr('data-type', p.type);
 	if (!p.after) {
 		p.after = $('.field').eq(-1);
@@ -78,6 +78,12 @@ $(document).on('build', '.row', function(e, row) {
 	}
 });
 
+$(document).on('remove', '.row', function(e, row) {
+	if (!e.isPropagationStopped()) {
+		$(this).remove();
+	}
+});
+
 $(document).delegate('.field td.cell', 'keyup', function(e) {
 	var value = $(this).text() != $(this).attr('placeholder') ? $(this).text() :'';
 	$(this).attr('value', value);
@@ -90,6 +96,17 @@ $(document).on('keydown', '.field', function(e) {
 	var $row = $cell.parents('.row').eq(0);
 
 	if (e.keyCode == 8 && $cell.attr('value') == false) {
+		if ($cell.prev('.cell').size()) {
+			var cell = $cell.prev().get(0);
+			$(cell).focus();
+			range = document.createRange();
+                        range.selectNodeContents(cell);
+                        range.collapse(false);
+                        selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+			return false;
+		}
 		if ($row.prev('.row').size()) {
 			var cell = $row.prev().find('.cell').get(-1);
 			$(cell).focus();
@@ -99,13 +116,13 @@ $(document).on('keydown', '.field', function(e) {
 			selection = window.getSelection();
 			selection.removeAllRanges();
 			selection.addRange(range);
-			$row.remove();
+			$row.trigger('remove');
 			return false;
 		}
 		else if ($row.next('.row').size()) {
-			var cell = $row.next().find('.cell').get(-1);
+			var cell = $row.next().find('.cell').get(0);
 			$(cell).focus();
-			$row.remove();
+			$row.trigger('remove');
 			return false;
 		}
 		else if ($field.prev('.field').size()) {
@@ -127,9 +144,9 @@ $(document).on('keydown', '.field', function(e) {
 			return false;
 		}
 	}
-	if (e.keyCode == 13 && !e.isPropagationStopped()) {
+	if (e.keyCode == 13 && !e.shiftKey && !e.isPropagationStopped()) {
 		if ($row.next('.row').size()) {
-			var cell = $row.next().find('.cell').get(-1);
+			var cell = $row.next().find('.cell').get(0);
 			$(cell).focus();
 			e.preventDefault();
 		}

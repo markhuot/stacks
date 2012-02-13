@@ -12,7 +12,7 @@ $(document).delegate('.field[data-type="list"] .cell', 'render', function(e) {
 
 $(document).on('keyup', '.field[data-type="list"] td.cell', function(e) {
 	var $field = $(this).parents('.field');
-	if ($(this).text() && !$field.find('.cell.placeholder').size()) {
+	if (e.keyCode != 8 && $(this).text() && !$field.find('.cell.placeholder').size()) {
 		$(this).trigger('add-row');
 	}
 });
