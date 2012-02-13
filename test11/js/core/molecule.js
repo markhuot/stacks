@@ -5,6 +5,7 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 
 	if (e.keyCode == 8 && !$cell.val()) {
 		if ($atom.data('multiple') && $row.siblings('.row').size() > 0) {
+			$row.prev('.row').trigger('focus.stacks');
 			$row.trigger('remove-row.stacks');
 		}
 		else {
