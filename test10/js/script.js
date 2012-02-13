@@ -21,25 +21,24 @@ $(document).on('update', '.fields', function(e) {
 
 $(document).on('change', '.add select', function(e) {
 	$('.fields').trigger('add-field', {type:$(this).val()});
+	$(this).val('');
 });
 
 $(document).on('add-field', '.fields', function(e, p) {
 	if (!p.type) { p.type = 'paragraph'; }
-	var $newField = $('<div class="field" />').hide();
+	var $newField = $('<div class="field" />');
 	$newField.attr('data-type', p.type);
 	if (!p.after) {
 		p.after = $('.field').eq(-1);
 	}
 	$(p.after).after($newField);
-	$newField.slideDown();
 	$newField.trigger('init');
 	e.preventDefault();
 });
 
 $(document).on('init', '.field', function(e) {
 	var $field = $(this);
-	var $front = $('<div class="front" />');
-	$front.append('<div class="chooser"><p class="icon" /></div><div class="field-contents"><table /></div>');
+	var $front = $('<div class="front"><div class="chooser"><p class="icon" /></div><div class="field-contents"><table /></div></div>');
 	var $back = $('<div class="back" />');
 	$field.append($front);
 	$field.append($back);

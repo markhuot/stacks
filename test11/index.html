@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Test</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="pictos/pictos.css" type="text/css">
+  <!-- end CSS-->
+</head>
+
+<body>
+
+  <div id="main" role="main">
+    <div class="molecule">
+      <h1 class="title">Body</h1>
+      <div class="atoms">
+        <div class="atom" data-type="paragraph"></div>
+        <div class="atom" data-type="list"></div>
+        <div class="atom" data-type="image"></div>
+      </div>
+      <ul class="add">
+        <li value="heading"><a href="#">Heading</a></option>
+        <li value="paragraph"><a href="#">Paragraph</a></option>
+        <li value="blockquote"><a href="#">Blockquote</a></option>
+        <li value="list"><a href="#">List</a></option>
+        <li value="img"><a href="#">Image</a></option>
+      </ul>
+    </div>
+  </div>
+
+  <div id="sub">
+    Output
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="js/libs/jquery-ui-1.8.17.custom.min.js"></script>
+  <script src="js/libs/jquery.ui.touch-punch.js"></script>
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/fields/paragraph.js"></script>
+  <script defer src="js/fields/list.js"></script>
+  <script defer src="js/fields/image.js"></script>
+  <script defer src="js/core/molecule.js"></script>
+  <script defer src="js/core/atom.js"></script>
+  <script defer src="js/core/row.js"></script>
+  <script defer src="js/core/cell.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts-->
+  
+</body>
+</html>

@@ -1,0 +1,14 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.atoms {
+	width: 50%;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.table {
+	width: 100%;
+}
