@@ -4,13 +4,21 @@ $(document).on('add-row.stacks', '.atom', function(e) {
 	$row.find('[contenteditable]').eq(0).trigger('focus.stacks');
 });
 
-$(document).on('remove-row.stacks', '.row', function(e) {
+$(document).on('remove-row.stacks', '.row', function(e, index) {
+	if (!index) { index = -1; }
+	if (index == -1) {
+		$focus = $(this).prev('.row');
+	}
+	else {
+		$focus = $(this).next('.row');
+	}
+	$focus.trigger('focus.stacks', index);
 	$(this).remove();
 });
 
 $(document).on('focus.stacks', '.row', function(e, index) {
 	if (!index) { index = 0; }
-	var cell = $(this).find('.cell').eq(index).get(0);
+	var cell = $(this).find('.cell').eq(index).get(index);
 	range = document.createRange();
 	range.selectNodeContents(cell);
 	range.collapse(index == 0);

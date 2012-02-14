@@ -30,14 +30,15 @@ $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 		$(this).find('.atoms').append($atom);
 	}
 	$atom.trigger('render.stacks');
-	$atom.find('[contenteditable]').eq(0).focus();
+	$atom.find('[contenteditable]').eq(0).trigger('focus.stacks');
 });
 
 $(document).on('remove-atom.stacks', '.atom', function(e) {
-	$focus = $(this).prev('.atom');
-	if (!$focus.size()) {
-		$focus = $(this).next('.atom');
-	}
+	$(this).prev('.atom').trigger('focus.stacks', -1);
 	$(this).remove();
-	$focus.find('[contenteditable]').eq(-1).trigger('focus.stacks');
+});
+
+$(document).on('focus.stacks', '.atom', function(e, index) {
+	if (!index) { index = 0; }
+	var $row = $(this).find('.row').eq(index).trigger('focus.stacks', index);
 });
