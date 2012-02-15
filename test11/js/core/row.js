@@ -1,18 +1,17 @@
 $(document).on('add-row.stacks', '.atom', function(e) {
 	var $row = $('<tr class="row"><td class="cell" contenteditable="true" /></tr>');
 	$(this).find('table').append($row);
-	$row.find('[contenteditable]').eq(0).trigger('focus.stacks');
+	$row.find('.cell').eq(0).trigger('focus.stacks');
 });
 
-$(document).on('remove-row.stacks', '.row', function(e, index) {
-	if (!index) { index = -1; }
-	if (index == -1) {
-		$focus = $(this).prev('.row');
+$(document).on('remove-row.stacks', '.row', function(e) {
+	var $row = $(this);
+	var $atom = $row.parents('.atom').eq(0);
+
+	if ($atom.data('multiple') && $row.siblings('.row').size() == 0) {
+		$atom.trigger('remove-atom.stacks');
 	}
-	else {
-		$focus = $(this).next('.row');
-	}
-	$focus.trigger('focus.stacks', index);
+
 	$(this).remove();
 });
 

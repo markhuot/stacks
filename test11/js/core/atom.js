@@ -30,11 +30,10 @@ $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 		$(this).find('.atoms').append($atom);
 	}
 	$atom.trigger('render.stacks');
-	$atom.find('[contenteditable]').eq(0).trigger('focus.stacks');
+	$atom.find('.cell').eq(0).trigger('focus.stacks');
 });
 
 $(document).on('remove-atom.stacks', '.atom', function(e) {
-	$(this).prev('.atom').trigger('focus.stacks', -1);
 	$(this).remove();
 });
 
