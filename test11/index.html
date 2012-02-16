@@ -11,6 +11,9 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="pictos/pictos.css" type="text/css">
+  <link rel="stylesheet" href="css/fields/list.css">
+  <link rel="stylesheet" href="css/fields/heading.css">
+  <link rel="stylesheet" href="css/fields/rule.css">
   <!-- end CSS-->
 </head>
 
@@ -20,16 +23,16 @@
     <div class="molecule">
       <h1 class="title">Body</h1>
       <div class="atoms">
-        <div class="atom" data-type="paragraph"></div>
         <div class="atom" data-type="list"></div>
-        <div class="atom" data-type="image"></div>
+        <div class="atom" data-type="blockquote"></div>
       </div>
       <ul class="add">
-        <li value="heading"><a href="#">Heading</a></option>
-        <li value="paragraph"><a href="#">Paragraph</a></option>
-        <li value="blockquote"><a href="#">Blockquote</a></option>
-        <li value="list"><a href="#">List</a></option>
-        <li value="img"><a href="#">Image</a></option>
+        <li><a href="#" data-type="heading">Heading</a></option>
+        <li><a href="#" data-type="paragraph">Paragraph</a></option>
+        <li><a href="#" data-type="blockquote">Blockquote</a></option>
+        <li><a href="#" data-type="list">List</a></option>
+        <li><a href="#" data-type="image">Image</a></option>
+        <li><a href="#" data-type="rule">Rule</a></option>
       </ul>
     </div>
   </div>
@@ -49,6 +52,8 @@
   <script defer src="js/fields/paragraph.js"></script>
   <script defer src="js/fields/list.js"></script>
   <script defer src="js/fields/image.js"></script>
+  <script defer src="js/fields/blockquote.js"></script>
+  <script defer src="js/fields/rule.js"></script>
   <script defer src="js/core/molecule.js"></script>
   <script defer src="js/core/atom.js"></script>
   <script defer src="js/core/row.js"></script>

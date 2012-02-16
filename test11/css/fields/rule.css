@@ -1,0 +1,10 @@
+.atom[data-type="rule"] .content {
+	padding: 0;
+	background: #eee;
+	text-align: center;
+}
+
+.atom[data-type="rule"] .content:after {
+	content: "•";
+	color: #999;
+}

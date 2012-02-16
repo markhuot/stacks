@@ -9,9 +9,10 @@ $(document).on('render.stacks', '.atom', function(e) {
 		$tr = $('<tr class="row" />');
 		$table.append($tr);
 		for (j=0; j<$this.data('cols'); j++) {
-			$td = $('<td class="cell" contenteditable></td>');
+			$content = $('<div class="content" contenteditable />')
+			$td = $('<td class="cell" />').append($content);
 			$tr.append($td);
-			$td.trigger('render.stacks', {
+			$content.trigger('render.stacks', {
 				"row": i,
 				"column": j
 			});
@@ -22,7 +23,8 @@ $(document).on('render.stacks', '.atom', function(e) {
 });
 
 $(document).on('add-atom.stacks', '.molecule', function(e, o) {
-	var $atom = $('<div class="atom" data-type="paragraph" />');
+	if (!o.type) { o.type = 'paragraph'; }
+	var $atom = $('<div class="atom" data-type="'+(o.type)+'" />');
 	if (o && o.after) {
 		(o.after).after($atom);
 	}
@@ -35,9 +37,4 @@ $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 
 $(document).on('remove-atom.stacks', '.atom', function(e) {
 	$(this).remove();
-});
-
-$(document).on('focus.stacks', '.atom', function(e, index) {
-	if (!index) { index = 0; }
-	var $row = $(this).find('.row').eq(index).trigger('focus.stacks', index);
 });

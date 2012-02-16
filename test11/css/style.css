@@ -1,14 +1,48 @@
-* {
+/** {
 	margin: 0;
 	padding: 0;
-}
-
-.atoms {
-	width: 50%;
-	padding: 20px;
-	border: 1px solid #ccc;
-}
+}*/
 
 .table {
 	width: 100%;
 }
+
+.atoms {
+	width: 50%;
+	border: 1px solid #ccc;
+}
+
+/*.table {
+	border-collapse: collapse;
+}
+
+.table, .cell {
+	border: none;
+}
+
+.cell {
+	border-bottom: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+.atom .cell:last-child {
+	border-right: none;
+}
+
+.atom:last-child tr:last-child .cell {
+	border-bottom: none;
+}
+
+.molecule:hover .cell {
+	border-color: #ccc;
+}
+
+*:focus {
+	outline: none;
+}
+
+.content {
+	line-height: 1.4;
+	font-size: 18px;
+	padding: 10px;
+}*/
