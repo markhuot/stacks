@@ -1,3 +1,3 @@
-$(document).on('focus.stacks', '.atom[data-type="rule"] .cell', function(e) {
-	e.stopPropagation();
+$(document).on('render.stacks', '.atom[data-type="rule"] .cell', function(e) {
+	$(this).attr('data-focusable', false);
 });

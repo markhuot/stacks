@@ -12,6 +12,13 @@
 	border: 1px solid #ccc;
 }
 
+*:focus {
+	background: red;
+
+.cell {
+	vertical-align: top;
+}
+
 /*.table {
 	border-collapse: collapse;
 }

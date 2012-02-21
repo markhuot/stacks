@@ -32,9 +32,5 @@ $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 		$(this).find('.atoms').append($atom);
 	}
 	$atom.trigger('render.stacks');
-	$atom.find('.cell').eq(0).trigger('focus.stacks');
-});
-
-$(document).on('remove-atom.stacks', '.atom', function(e) {
-	$(this).remove();
+	$atom.find('.cell').eq(0).trigger('foci.stacks');
 });
