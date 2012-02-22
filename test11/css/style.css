@@ -14,9 +14,14 @@
 
 *:focus {
 	background: red;
+}
 
 .cell {
 	vertical-align: top;
+}
+
+.content {
+	height: 100%;
 }
 
 /*.table {

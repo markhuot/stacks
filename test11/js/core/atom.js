@@ -24,7 +24,7 @@ $(document).on('render.stacks', '.atom', function(e) {
 
 $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 	if (!o.type) { o.type = 'paragraph'; }
-	var $atom = $('<div class="atom" data-type="'+(o.type)+'" />');
+	var $atom = $('<div class="atom" data-type="'+(o.type)+'" tabindex="0" />');
 	if (o && o.after) {
 		(o.after).after($atom);
 	}

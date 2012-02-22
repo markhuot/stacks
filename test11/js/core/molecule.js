@@ -36,7 +36,7 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 		}
 		else if (!$src.hasClass('atom')) {
 			$atom.find(':focus').blur();
-			$atom.attr('tabindex', 0);
+			//$atom.attr('tabindex', 0);
 			$atom.focus();
 		}
 		else if ($atom.prev('.atom').find('.row:has(.cell[data-focusable!="false"])').size()) {
@@ -44,7 +44,7 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 			$atom.trigger('remove.stacks');
 		}
 		else {
-			$atom.prev('.atom').attr('tabindex', 0);
+			//$atom.prev('.atom').attr('tabindex', 0);
 			$atom.prev('.atom').focus();
 			$atom.trigger('remove.stacks');
 		}
@@ -79,10 +79,10 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 			});
 		}
 		else if ($atom.data('multiple') && !$cell.val()) {
-			$row.trigger('remove.stacks');
 			$molecule.trigger('add-atom.stacks', {
 				"after": $atom
 			});
+			$row.trigger('remove.stacks');
 		}
 		else if (!$atom.data('multiple') && $row.next('.row').size()) {
 			$row.next('.row').trigger('foci.stacks');
@@ -104,6 +104,12 @@ $(document).on('keyup.stacks', '.molecule', function(e) {
 	if ($cell.size()) {
 		$cell.attr('value', $cell.find('.content').text());	
 	}
+});
+
+$(document).on('focus', '.molecule [data-focusable="false"]', function(e) {
+	$(e.srcElement).blur();
+	//$(e.srcElement).parents('.atom').attr('tabindex', 0);
+	$(e.srcElement).parents('.atom').focus();
 });
 
 $(document).on('foci.stacks', '.molecule', function(e, index) {
@@ -131,12 +137,12 @@ $(document).on('foci.stacks', '.molecule', function(e, index) {
 	e.stopPropagation();
 });
 
-$(document).on('blur.stacks', '.molecule', function(e) {
-	var $src = $(e.srcElement);
-	if ($src.hasClass('atom')) {
-		$src.removeAttr('tabindex');
-	}
-});
+// $(document).on('blur.stacks', '.molecule', function(e) {
+// 	var $src = $(e.srcElement);
+// 	if ($src.hasClass('atom')) {
+// 		$src.removeAttr('tabindex');
+// 	}
+// });
 
 $(document).on('remove.stacks', '.molecule', function(e) {
 	var $target = $(e.target);
