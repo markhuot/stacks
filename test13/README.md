@@ -14,15 +14,15 @@ Classifications
 
 ----------------------------
 
-Template
-  ↳ Entry
-    ↳ Field
-      ↳ Stack
-        ↳ Stack Content
-      ↳ Stack
-      ↳ Stack
-    ↳ Field
-  ↳ Entry
-    ↳ Field
-      ↳ Stack
-        ↳ Stack Content
+    Template
+      ↳ Entry
+        ↳ Field
+          ↳ Stack
+            ↳ Stack Content
+          ↳ Stack
+          ↳ Stack
+        ↳ Field
+      ↳ Entry
+        ↳ Field
+          ↳ Stack
+            ↳ Stack Content
