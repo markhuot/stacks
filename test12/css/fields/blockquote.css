@@ -1,0 +1,7 @@
+.atom[data-type="blockquote"] .content {
+	padding: 0 0 0 100px;
+}
+
+.atom[data-type="blockquote"] [name="author"] {
+	font-style: italic;
+}

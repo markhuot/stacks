@@ -3,6 +3,10 @@ $(document).on('render.stacks', '.atom', function(e) {
 	if (!$this.data('cols')) { $this.data('cols', 1); }
 	if (!$this.data('rows')) { $this.data('rows', 1); }
 
+	if ($this.is('[data-focusable!="false"]')) {
+		$(this).attr('tabindex', 0);
+	}
+
 	$table = $('<table border="1" class="table" />');
 	$this.append($table);
 	for (i=0; i<$this.data('rows'); i++) {
@@ -24,7 +28,7 @@ $(document).on('render.stacks', '.atom', function(e) {
 
 $(document).on('add-atom.stacks', '.molecule', function(e, o) {
 	if (!o.type) { o.type = 'paragraph'; }
-	var $atom = $('<div class="atom" data-type="'+(o.type)+'" tabindex="0" />');
+	var $atom = $('<div class="atom" data-type="'+(o.type)+'" />');
 	if (o && o.after) {
 		(o.after).after($atom);
 	}

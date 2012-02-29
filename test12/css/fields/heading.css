@@ -1,3 +1,8 @@
 .atom[data-type="heading"] td {
 	font-weight: bold;
+	font-size: 24px;
+}
+
+.atom[data-type="heading"] .content {
+	padding: 1em 10px 10px;
 }

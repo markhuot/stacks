@@ -1,60 +1,86 @@
-/** {
+.stack * {
 	margin: 0;
 	padding: 0;
-}*/
+}
 
-.table {
+.stack {
+	margin: 0 0 10px;
+	font-family: "Lucida Grande", sans-serif;
+}
+
+.stack .molecule {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.stack .table {
+	border-collapse: collapse;
+	border: none;
 	width: 100%;
 }
 
-.atoms {
-	width: 50%;
-	border: 1px solid #ccc;
-}
-
-*:focus {
-	background: red;
-}
-
-.cell {
-	vertical-align: top;
-}
-
-.content {
-	height: 100%;
-}
-
-/*.table {
-	border-collapse: collapse;
-}
-
-.table, .cell {
+.stack .cell {
 	border: none;
 }
 
-.cell {
-	border-bottom: 1px solid transparent;
-	border-right: 1px solid transparent;
-}
-
-.atom .cell:last-child {
-	border-right: none;
-}
-
-.atom:last-child tr:last-child .cell {
-	border-bottom: none;
-}
-
-.molecule:hover .cell {
-	border-color: #ccc;
-}
-
-*:focus {
+.stack *:focus {
+	background: #fffde8;
 	outline: none;
 }
 
-.content {
-	line-height: 1.4;
-	font-size: 18px;
+.stack .atom:focus {
+	outline: 3px solid #CFE4FF;
+}
+
+.stack .content {
+	height: 100%;
 	padding: 10px;
-}*/
+}
+
+.stack .add {
+	opacity: 0.25;
+}
+
+.stack .add:hover {
+	opacity: 1;
+}
+
+.stack > .add a {
+	display: block;
+	border-radius: 5px;
+	text-decoration: none;
+	color: #999;
+	padding: 5px 10px;
+	font-size: 12px;
+	background: whiteSmoke;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.stack .molecule > .add:before {
+	content: "Add content: ";
+	padding: 5px 5px 5px 0;
+	display: inline-block;
+}
+
+.stack .molecule > .add {
+	background: whiteSmoke;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	list-style: none;
+	color: #ccc;
+	font-size: 12px;
+}
+
+.stack .molecule > .add li {
+	display: inline-block;
+}
+
+.stack .molecule > .add a {
+	display: inline-block;
+	padding: 5px 10px 5px 0;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	color: #999;
+}

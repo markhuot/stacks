@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="pictos/pictos.css" type="text/css">
   <link rel="stylesheet" href="css/fields/list.css">
+  <link rel="stylesheet" href="css/fields/blockquote.css">
   <link rel="stylesheet" href="css/fields/heading.css">
   <link rel="stylesheet" href="css/fields/rule.css">
   <!-- end CSS-->
@@ -19,31 +20,22 @@
 
 <body>
 
+  <ul class="nav">
+    <li><a class="logo" href="#">Dashboard</a></li>
+    <li><a class="logo" href="#">Content</a></li>
+    <li><a class="logo" href="#">Structure</a></li>
+    <li><a class="logo" href="#">Users</a></li>
+    <li><a class="logo" href="#">Admin</a></li>
+  </ul>
+
   <div id="main" role="main">
-    <div class="">
+    <div class="stack">
       <h1 class="title">Body</h1>
-      <div class="molecule">
-        <div class="atoms">
-          <div class="atom" tabindex="0" data-type="paragraph"></div>
-          <div class="atom" tabindex="0" data-type="list"></div>
-          <div class="atom" tabindex="0" data-type="blockquote"></div>
-          <div class="atom" tabindex="0" data-type="rule"></div>
-          <div class="atom" tabindex="0" data-type="list"></div>
-        </div>
-        <ul class="add">
-          <li><a href="#" data-type="heading">Heading</a></option>
-          <li><a href="#" data-type="paragraph">Paragraph</a></option>
-          <li><a href="#" data-type="blockquote">Blockquote</a></option>
-          <li><a href="#" data-type="list">List</a></option>
-          <li><a href="#" data-type="image">Image</a></option>
-          <li><a href="#" data-type="rule">Rule</a></option>
-        </ul>
+      <div class="molecule"></div>
+      <div class="add">
+        <a href="#">Add another block</a>
       </div>
     </div>
-  </div>
-
-  <div id="sub">
-    Output
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -55,14 +47,16 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/fields/paragraph.js"></script>
+  <script defer src="js/fields/heading.js"></script>
   <script defer src="js/fields/list.js"></script>
   <script defer src="js/fields/image.js"></script>
   <script defer src="js/fields/blockquote.js"></script>
   <script defer src="js/fields/rule.js"></script>
-  <script defer src="js/core/molecule.js"></script>
-  <script defer src="js/core/atom.js"></script>
-  <script defer src="js/core/row.js"></script>
   <script defer src="js/core/cell.js"></script>
+  <script defer src="js/core/row.js"></script>
+  <script defer src="js/core/atom.js"></script>
+  <script defer src="js/core/molecule.js"></script>
+  <script defer src="js/core/stack.js"></script>
   <script defer src="js/script.js"></script>
   <!-- end scripts-->
   

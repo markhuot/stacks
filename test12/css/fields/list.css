@@ -1,6 +1,7 @@
 .atom[data-type="list"] td {
 	position: relative;
 	padding-left: 20px;
+	font-size: 12px;
 }
 .atom[data-type="list"] td:before {
 	content: "•";

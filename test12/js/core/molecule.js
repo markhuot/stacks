@@ -2,6 +2,24 @@ $(document).on('render.stacks', '.cell', function(e) {
 	e.stopPropagation();
 });
 
+$(document).on('render.stacks', '.molecule', function(e) {
+	$(this).append('<div class="atoms"><div class="atom" data-type="paragraph" /></div>');
+	$(this).append($('<ul />', {"class":"add"}));
+	$(this).find('.add').trigger('render.stacks');
+	$(this).find('.atom').trigger('render.stacks');
+	e.stopPropagation();
+});
+
+$(document).on('render.stacks', '.molecule > .add', function(e) {
+	$(this).append('<li><a href="#" data-type="heading">Heading</a></option>');
+	$(this).append('<li><a href="#" data-type="paragraph">Paragraph</a></option>');
+	$(this).append('<li><a href="#" data-type="blockquote">Blockquote</a></option>');
+	$(this).append('<li><a href="#" data-type="list">List</a></option>');
+	$(this).append('<li><a href="#" data-type="image">Image</a></option>');
+	$(this).append('<li><a href="#" data-type="rule">Rule</a></option>');
+	e.stopPropagation();
+});
+
 $(document).on('click', '.molecule .add a', function(e) {
 	var $molecule = $(e.srcElement).parents('.molecule').eq(0);
 	$molecule.trigger('add-atom', {
@@ -34,9 +52,8 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 		else if (!$atom.data('multiple') && $row.prevAll('.row:has(.cell[data-focusable!="false"])').size()) {
 			$row.prevAll('.row:has(.cell[data-focusable!="false"])').eq(0).trigger('foci.stacks', -1);
 		}
-		else if (!$src.hasClass('atom')) {
+		else if (!$src.hasClass('atom') && $atom.is('[data-focusable!="false"]')) {
 			$atom.find(':focus').blur();
-			//$atom.attr('tabindex', 0);
 			$atom.focus();
 		}
 		else if ($atom.prev('.atom').find('.row:has(.cell[data-focusable!="false"])').size()) {
@@ -44,7 +61,6 @@ $(document).on('keydown.stacks', '.molecule', function(e) {
 			$atom.trigger('remove.stacks');
 		}
 		else {
-			//$atom.prev('.atom').attr('tabindex', 0);
 			$atom.prev('.atom').focus();
 			$atom.trigger('remove.stacks');
 		}
@@ -106,9 +122,8 @@ $(document).on('keyup.stacks', '.molecule', function(e) {
 	}
 });
 
-$(document).on('focus', '.molecule [data-focusable="false"]', function(e) {
+$(document).on('focus', '.molecule .cell[data-focusable="false"]', function(e) {
 	$(e.srcElement).blur();
-	//$(e.srcElement).parents('.atom').attr('tabindex', 0);
 	$(e.srcElement).parents('.atom').focus();
 });
 
@@ -136,13 +151,6 @@ $(document).on('foci.stacks', '.molecule', function(e, index) {
 
 	e.stopPropagation();
 });
-
-// $(document).on('blur.stacks', '.molecule', function(e) {
-// 	var $src = $(e.srcElement);
-// 	if ($src.hasClass('atom')) {
-// 		$src.removeAttr('tabindex');
-// 	}
-// });
 
 $(document).on('remove.stacks', '.molecule', function(e) {
 	var $target = $(e.target);

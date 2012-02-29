@@ -1,3 +1,3 @@
 $(function() {
-	$('.atom').trigger('render.stacks');
+	$('.molecule').trigger('render.stacks');
 });
