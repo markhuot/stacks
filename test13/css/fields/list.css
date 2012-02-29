@@ -1,0 +1,15 @@
+.atom[data-type="list"] td {
+	position: relative;
+	padding-left: 20px;
+	font-size: 12px;
+}
+.atom[data-type="list"] td:before {
+	content: "•";
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	margin-top: -0.5em;
+}
+.atom[data-type="list"] .content {
+	padding: 0px 5px;
+}

@@ -1,0 +1,170 @@
+@font-face {
+   font-family: 'LatoBlack';
+   src: url('../fonts/Lato/Lato-Black.ttf') format('truetype');
+}
+
+@font-face {
+   font-family: 'LatoBlackItalic';
+   src: url('../fonts/Lato/Lato-BlackItalic.ttf') format('truetype');
+}
+
+@font-face {
+   font-family: 'LatoLight';
+   src: url('../fonts/Lato/Lato-Light.ttf') format('truetype');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.wrap {
+	background: #333;
+	font-family: "Lucida Grande", sans-serif;
+	font-size: 62.5%;
+}
+
+.client {
+	padding: 20px 0 0 120px;
+	color: rgb(230,230,230);
+	text-shadow: 2px 3px 0 #000;
+	letter-spacing: 1px;
+	font-family: 'LatoBlackItalic', sans-serif;
+}
+
+.nav {
+	margin-top: 50px;
+	float: left;
+	width: 100px;
+	text-align: center;
+	font-family: 'LatoLight';
+	font-size: 12px;
+}
+
+.nav a {
+	text-decoration: none;
+	color: #999;
+	width: 100px;
+	padding: 75px 0 10px;
+	display: block;
+}
+
+.nav a:hover {
+	background: #000;
+}
+
+.main {
+	background: #fff;
+	margin: 10px 0 0 100px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.85),
+	            inset 0 0 20px rgba(0,0,0,0.2);
+	min-height: 1000px;
+	border-radius: 2px 0 0 0;
+}
+
+.crumbs {
+	list-style: none;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.crumbs li {
+	display: inline-block;
+}
+
+.crumbs a {
+	display: inline-block;
+	margin: 0 20px 0 0;
+	padding: 10px;
+}
+
+.content {
+	padding: 20px;
+}
+
+.stack * {
+	margin: 0;
+	padding: 0;
+}
+
+.stack {
+	margin: 0 0 10px;
+	font-family: "Lucida Grande", sans-serif;
+	font-size: 12px;
+}
+
+.stack .molecule {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.stack .table {
+	border-collapse: collapse;
+	border: none;
+	width: 100%;
+}
+
+.stack .cell {
+	border: none;
+}
+
+.stack *:focus {
+	background: #fffde8;
+	outline: none;
+}
+
+.stack .atom:focus {
+	outline: 3px solid #CFE4FF;
+}
+
+.stack .content {
+	height: 100%;
+	padding: 10px;
+}
+
+.stack .add {
+	opacity: 0.25;
+}
+
+.stack .add:hover {
+	opacity: 1;
+}
+
+.stack > .add a {
+	display: block;
+	border-radius: 5px;
+	text-decoration: none;
+	color: #999;
+	padding: 5px 10px;
+	font-size: 12px;
+	background: whiteSmoke;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.stack .molecule > .add:before {
+	content: "Add content: ";
+	padding: 5px 5px 5px 0;
+	display: inline-block;
+}
+
+.stack .molecule > .add {
+	background: whiteSmoke;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	list-style: none;
+	color: #ccc;
+	font-size: 12px;
+}
+
+.stack .molecule > .add li {
+	display: inline-block;
+}
+
+.stack .molecule > .add a {
+	display: inline-block;
+	padding: 5px 10px 5px 0;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	color: #999;
+}
