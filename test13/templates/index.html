@@ -22,15 +22,19 @@
 
   <div class="wrap">
 
-    <h1 class="client">Acme Widgets</h1>
+    <h1 class="client" contenteditable>Acme Widgets</h1>
 
-    <ul class="nav">
-      <li><a class="logo" href="#">Dashboard</a></li>
-      <li><a class="logo" href="#">Content</a></li>
-      <li><a class="logo" href="#">Design</a></li>
-      <li><a class="logo" href="#">Users</a></li>
-      <li><a class="logo" href="#">Admin</a></li>
-    </ul>
+    <div class="navigation">
+      <ul class="nav">
+        <li><a class="logo" href="#">Dashboard</a></li>
+        <li class="on"><a class="logo" href="#">Content</a></li>
+        <li><a class="logo" href="#">Assets</a></li>
+      </ul>
+
+      <ul class="utility">
+        <li><a class="logo" href="#">Admin</a></li>
+      </ul>
+    </div>
 
     <div class="main" role="main">
       <ul class="crumbs">
@@ -45,6 +49,13 @@
         </div>
         <div class="stack">
           <h3 class="title">Body</h1>
+          <div class="molecule" multiple></div>
+          <div class="add">
+            <a href="#">Add another block</a>
+          </div>
+        </div>
+        <div class="stack">
+          <h3 class="title">Sidebar</h1>
           <div class="molecule" multiple></div>
           <div class="add">
             <a href="#">Add another block</a>

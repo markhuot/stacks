@@ -1,0 +1,209 @@
+@font-face {
+   font-family: 'LatoBlack';
+   src: url('../fonts/Lato/Lato-Black.ttf') format('truetype');
+}
+
+@font-face {
+   font-family: 'LatoBlackItalic';
+   src: url('../fonts/Lato/Lato-BlackItalic.ttf') format('truetype');
+}
+
+@font-face {
+   font-family: 'LatoLight';
+   src: url('../fonts/Lato/Lato-Light.ttf') format('truetype');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.wrap {
+	background: whiteSmoke;
+	font-family: "Lucida Grande", sans-serif;
+	font-size: 62.5%;
+}
+
+.client {
+	margin: 50px 25px 25px;
+	display: inline-block;
+	color: #222;
+	text-shadow: 1px 2px 0 whiteSmoke,
+	             2px 4px 0 #ccc;
+	letter-spacing: 1px;
+	font-family: 'LatoBlackItalic', sans-serif;
+	font-size: 36px;
+}
+
+.navigation {
+	margin: 0 25px;
+	background: #333;
+	overflow: hidden;
+}
+
+.navigation:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.navigation ul {
+	font-family: 'LatoLight';
+	font-size: 12px;
+	float: left;
+}
+
+.navigation .utility {
+	float: right;
+}
+
+.navigation li {
+	display: inline-block;
+	text-align: center;
+}
+
+.navigation .on a {
+	background: #444;
+	color: #fff;
+}
+
+.navigation a {
+	text-decoration: none;
+	color: #999;
+	padding: 10px 20px;
+	width: 100px;
+	text-align: left;
+	display: inline-block;
+}
+
+.navigation .utility a {
+	text-align: right;
+}
+
+.navigation a:hover {
+	background: #000;
+}
+
+.main {
+	background: #fff;
+	margin: 0 25px 0;
+	min-height: 1000px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+.crumbs {
+	background: #eee;
+	padding: 10px 20px;
+	list-style: none;
+}
+
+.crumbs li {
+	display: inline-block;
+}
+
+.crumbs a {
+	display: inline-block;
+	margin: 0 20px 0 0;
+}
+
+.content {
+	padding: 20px;
+}
+
+.stack * {
+	margin: 0;
+	padding: 0;
+}
+
+.stack {
+	margin: 0 0 10px;
+	font-family: "Lucida Grande", sans-serif;
+	font-size: 12px;
+}
+
+.stack .molecule {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.stack .table {
+	border-collapse: collapse;
+	border: none;
+	width: 100%;
+}
+
+.stack .cell {
+	border: none;
+}
+
+.stack *:focus {
+	background: #fffde8;
+	outline: none;
+}
+
+.stack .atom:focus {
+	outline: 3px solid #CFE4FF;
+}
+
+.stack .content {
+	height: 100%;
+	padding: 10px;
+}
+
+.stack .add {
+	opacity: 0.25;
+}
+
+.stack .add:hover {
+	opacity: 1;
+}
+
+.stack > .add a {
+	display: block;
+	border-radius: 5px;
+	text-decoration: none;
+	color: #999;
+	padding: 5px 10px;
+	font-size: 12px;
+	background: whiteSmoke;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.stack .molecule > .add:before {
+	content: "Add content: ";
+	padding: 5px 5px 5px 0;
+	display: inline-block;
+}
+
+.stack .molecule > .add {
+	background: whiteSmoke;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	list-style: none;
+	color: #ccc;
+	font-size: 12px;
+}
+
+.stack .molecule > .add li {
+	display: inline-block;
+}
+
+.stack .molecule > .add a {
+	display: inline-block;
+	padding: 5px 10px 5px 0;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	color: #999;
+}
+
+.submit {
+	background: whiteSmoke;
+	padding: 10px;
+	text-align: right;
+	border-radius: 5px;
+}

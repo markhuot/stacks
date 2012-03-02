@@ -1,0 +1,7 @@
+/*[data-type="paragraph"] .content {
+	min-height: 0;
+}
+
+.molecule[data-count="1"] [data-type="paragraph"] .content {
+	min-height: 200px;
+}*/
